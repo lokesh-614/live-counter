@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Energy Discahrged in MJ</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: grid; place-items: center;
+    padding: 20px; font-family: Arial, Helvetica, sans-serif;
+    background: #fff; color: #111;
+  }
+  main { text-align: center; }
+  h1 { margin: 0 0 18px; font-size: clamp(1.4rem, 4vw, 2.2rem); font-weight: 600; }
+  #value { font-size: clamp(2.8rem, 10vw, 5rem); font-weight: 700; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Energy Discharged in MJ</h1>
+  <div id="value" aria-live="polite">—</div>
+</main>
+<script>
+(() => {
+  const output = document.getElementById('value');
+  function update() {
+    const now = new Date();
+    const initial = new Date(now);
+    initial.setHours(11, 0, 0, 0); // 11:00 AM today, local time
+    const elapsedMinutes = (now.getTime() - initial.getTime()) / 60000;
+    const capacity = elapsedMinutes * 2.8 *60 *.001;
+    output.textContent = capacity.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  }
+  update();
+  setInterval(update, 1000);
+})();
+</script>
+</body>
+</html>
