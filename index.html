@@ -31,7 +31,7 @@
     if (now < initial) {
       initial.setDate(initial.getDate() - 1);
     }
-    const elapsedMinutes = (now.getTime() - initial.getTime()) / 60000;
+    const elapsedMinutes = (now-initial) / 60000;
     const capacity = elapsedMinutes * 2.8 *60 *.001;
     output.textContent = capacity.toLocaleString(undefined, {
       minimumFractionDigits: 2,
