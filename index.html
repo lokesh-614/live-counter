@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Energy Discahrged in MJ</title>
+<title>Energy Discharged in MJ</title>
 <style>
   * { box-sizing: border-box; }
   body {
@@ -24,20 +24,22 @@
 <script>
 (() => {
   const output = document.getElementById('value');
+  
+  // Set your actual fixed start date/time (Year, Month [0-indexed], Day, Hour, Min, Sec)
+  // Note: Month is 0-indexed (0 = Jan, 10 = Nov, etc.)
+  const startDate = new Date(2026, 09, 28, 11, 0, 0); 
+
   function update() {
     const now = new Date();
-    const initial = new Date(now);
-    initial.setHours(11, 0, 0, 0); // 11:00 AM today, local time
-    if (now < initial) {
-      initial.setDate(initial.getDate() - 1);
-    }
-    const elapsedMinutes = (now-initial) / 60000;
-    const capacity = elapsedMinutes * 2.8 *60 *.001;
+    const elapsedMinutes = (now - startDate) / 60000;
+    const capacity = elapsedMinutes * 2.8 * 60 * 0.001;
+    
     output.textContent = capacity.toLocaleString(undefined, {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
   }
+  
   update();
   setInterval(update, 1000);
 })();
